@@ -284,10 +284,12 @@ export default class BlockEvents extends Module {
 
       if (BlockManager.previousBlock && BlockManager.previousBlock.inputs.length === 0) {
         /** If previous block doesn't contain inputs, remove it */
-        BlockManager.removeBlock(index - 1);
+        // BlockManager.removeBlock(index - 1);
+        console.log('no delete');
       } else {
         /** If block is empty, just remove it */
-        BlockManager.removeBlock();
+        // BlockManager.removeBlock();
+        console.log('no delete');
       }
 
       Caret.setToBlock(
