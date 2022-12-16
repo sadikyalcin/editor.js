@@ -479,7 +479,6 @@ export default class Toolbar extends Module<ToolbarNodes> {
 
     if (blockContentNode) {
       this.nodes.wrapper.style.left = `${Math.floor(blockContentNode.offsetLeft + this.actionsWidth)}px`;
-      console.log('left: ', Math.floor(blockContentNode.offsetLeft + this.actionsWidth));
     }
   }
 
