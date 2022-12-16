@@ -473,12 +473,9 @@ export default class Toolbar extends Module<ToolbarNodes> {
      * Move Toolbar to the Top coordinate of Block
      */
     this.nodes.wrapper.style.top = `${Math.floor(toolbarY)}px`;
+    this.nodes.wrapper.style.left = `${Math.floor(targetBlockHolder.offsetLeft + this.actionsWidth)}px`;
 
-    const blockContentNode = targetBlockHolder.querySelector(`.${Block.CSS.content}`) as HTMLElement | null;
-
-    if (blockContentNode) {
-      this.nodes.wrapper.style.left = `${Math.floor(blockContentNode.offsetLeft + this.actionsWidth)}px`;
-    }
+    console.log(`pos - top: ${Math.floor(toolbarY)}, left: ${Math.floor(targetBlockHolder.offsetLeft + this.actionsWidth)}`);
   }
 
   /**
