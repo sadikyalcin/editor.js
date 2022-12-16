@@ -250,32 +250,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
 
     this.hoveredBlock = block;
 
-    const targetBlockHolder = block.holder;
-    const { isMobile } = this.Editor.UI;
-    const renderedContent = block.pluginsContent;
-    const renderedContentStyle = window.getComputedStyle(renderedContent);
-    const blockRenderedElementPaddingTop = parseInt(renderedContentStyle.paddingTop, 10);
-    const blockHeight = targetBlockHolder.offsetHeight;
-
-    let toolbarY;
-
-    /**
-     * On mobile — Toolbar at the bottom of Block
-     * On Desktop — Toolbar should be moved to the first line of block text
-     *              To do that, we compute the block offset and the padding-top of the plugin content
-     */
-    if (isMobile) {
-      toolbarY = targetBlockHolder.offsetTop + blockHeight;
-    } else {
-      toolbarY = (targetBlockHolder.offsetTop + blockRenderedElementPaddingTop) - this.actionsHeight;
-    }
-
-    /**
-     * Move Toolbar to the Top coordinate of Block
-     */
-    this.nodes.wrapper.style.top = `${Math.floor(toolbarY)}px`;
-
-    this.assignToolbarLeftPosition(block);
+    this.assignToolbarPosition(block);
 
     /**
      * Do not show Block Tunes Toggler near single and empty block
@@ -466,7 +441,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
    *
    * @param block - block to move Toolbar near it
    */
-  private assignToolbarLeftPosition(block: Block = this.Editor.BlockManager.currentBlock): void {
+  private assignToolbarPosition(block: Block = this.Editor.BlockManager.currentBlock): void {
     /**
      * If no Block is selected as a Current
      */
@@ -474,7 +449,31 @@ export default class Toolbar extends Module<ToolbarNodes> {
       return;
     }
 
-    const targetBlockHolder = block?.holder;
+    const targetBlockHolder = block.holder;
+    const { isMobile } = this.Editor.UI;
+    const renderedContent = block.pluginsContent;
+    const renderedContentStyle = window.getComputedStyle(renderedContent);
+    const blockRenderedElementPaddingTop = parseInt(renderedContentStyle.paddingTop, 10);
+    const blockHeight = targetBlockHolder.offsetHeight;
+
+    let toolbarY;
+
+    /**
+     * On mobile — Toolbar at the bottom of Block
+     * On Desktop — Toolbar should be moved to the first line of block text
+     *              To do that, we compute the block offset and the padding-top of the plugin content
+     */
+    if (isMobile) {
+      toolbarY = targetBlockHolder.offsetTop + blockHeight;
+    } else {
+      toolbarY = (targetBlockHolder.offsetTop + blockRenderedElementPaddingTop) - this.actionsHeight;
+    }
+
+    /**
+     * Move Toolbar to the Top coordinate of Block
+     */
+    this.nodes.wrapper.style.top = `${Math.floor(toolbarY)}px`;
+
     const blockContentNode = targetBlockHolder.querySelector(`.${Block.CSS.content}`) as HTMLElement | null;
 
     if (blockContentNode) {
@@ -531,11 +530,18 @@ export default class Toolbar extends Module<ToolbarNodes> {
        * This is needed because max-width is removed from Toolbar content to accommodate different block layouts
        */
       this.readOnlyMutableListeners.on(window, 'resize', () => {
-        this.assignToolbarLeftPosition(this.hoveredBlock);
+        this.assignToolbarPosition(this.hoveredBlock);
       }, {
         passive: true,
       });
     }
+
+    this.readOnlyMutableListeners.on(window, 'scroll', () => {
+      this.assignToolbarPosition(this.hoveredBlock);
+    }, {
+      passive: true,
+      capture: true,
+    });
   }
 
   /**
