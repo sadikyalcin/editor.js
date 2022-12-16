@@ -469,6 +469,9 @@ export default class Toolbar extends Module<ToolbarNodes> {
       toolbarY = (targetBlockHolder.offsetTop + blockRenderedElementPaddingTop) - this.actionsHeight;
     }
 
+    console.log('this.nodes.wrapper: ', this.nodes.wrapper);
+    console.log('targetBlockHolder: ', targetBlockHolder);
+
     /**
      * Move Toolbar to the Top coordinate of Block
      */
