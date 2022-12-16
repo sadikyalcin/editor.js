@@ -107,6 +107,14 @@ export default class Toolbar extends Module<ToolbarNodes> {
   private toolboxInstance: Toolbox;
 
   /**
+   * @private
+   * @type {number}
+   * @memberof Toolbar
+   */
+  private actionsWidth: number;
+  private actionsHeight: number;
+
+  /**
    * @class
    * @param moduleConfiguration - Module Configuration
    * @param moduleConfiguration.config - Editor's config
@@ -118,6 +126,8 @@ export default class Toolbar extends Module<ToolbarNodes> {
       eventsDispatcher,
     });
     this.tooltip = new Tooltip();
+    this.actionsWidth = 58;
+    this.actionsHeight = 26;
   }
 
   /**
@@ -257,7 +267,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
     if (isMobile) {
       toolbarY = targetBlockHolder.offsetTop + blockHeight;
     } else {
-      toolbarY = targetBlockHolder.offsetTop + blockRenderedElementPaddingTop;
+      toolbarY = (targetBlockHolder.offsetTop + blockRenderedElementPaddingTop) - this.actionsHeight;
     }
 
     /**
@@ -464,11 +474,12 @@ export default class Toolbar extends Module<ToolbarNodes> {
       return;
     }
 
-    const targetBlockHolder = block.holder;
+    const targetBlockHolder = block?.holder;
     const blockContentNode = targetBlockHolder.querySelector(`.${Block.CSS.content}`) as HTMLElement | null;
 
     if (blockContentNode) {
-      this.nodes.wrapper.style.left = `${Math.floor(blockContentNode.offsetLeft)}px`;
+      this.nodes.wrapper.style.left = `${Math.floor(blockContentNode.offsetLeft + this.actionsWidth)}px`;
+      console.log('left: ', Math.floor(blockContentNode.offsetLeft + this.actionsWidth));
     }
   }
 
@@ -517,7 +528,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
       });
 
       /**
-       * Need to move toolbar on resize because we are now moving it to te left of a Block
+       * Need to move toolbar on resize because we are now moving it to the left of a Block
        * This is needed because max-width is removed from Toolbar content to accommodate different block layouts
        */
       this.readOnlyMutableListeners.on(window, 'resize', () => {
