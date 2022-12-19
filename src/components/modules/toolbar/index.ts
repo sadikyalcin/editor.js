@@ -454,6 +454,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
     const renderedContent = block.pluginsContent;
     const renderedContentStyle = window.getComputedStyle(renderedContent);
     const blockRenderedElementPaddingTop = parseInt(renderedContentStyle.paddingTop, 10);
+    const blockRenderedElementPaddingLeft = parseInt(renderedContentStyle.paddingLeft, 10);
     const blockHeight = targetBlockHolder.offsetHeight;
 
     let toolbarY;
@@ -466,19 +467,16 @@ export default class Toolbar extends Module<ToolbarNodes> {
     if (isMobile) {
       toolbarY = targetBlockHolder.offsetTop + blockHeight;
     } else {
-      toolbarY = (targetBlockHolder.offsetTop + blockRenderedElementPaddingTop) - this.actionsHeight;
+      toolbarY = targetBlockHolder.offsetTop + blockRenderedElementPaddingTop;
     }
 
-    console.log('this.nodes.wrapper: ', this.nodes.wrapper);
-    console.log('targetBlockHolder: ', targetBlockHolder);
+    const toolbarX = targetBlockHolder.offsetLeft + blockRenderedElementPaddingLeft;
 
     /**
      * Move Toolbar to the Top coordinate of Block
      */
     this.nodes.wrapper.style.top = `${Math.floor(toolbarY)}px`;
-    this.nodes.wrapper.style.left = `${Math.floor(targetBlockHolder.offsetLeft + this.actionsWidth)}px`;
-
-    console.log(`pos - top: ${Math.floor(toolbarY)}, left: ${Math.floor(targetBlockHolder.offsetLeft + this.actionsWidth)}`);
+    this.nodes.wrapper.style.left = `${Math.floor(toolbarX)}px`;
   }
 
   /**
@@ -535,13 +533,6 @@ export default class Toolbar extends Module<ToolbarNodes> {
         passive: true,
       });
     }
-
-    this.readOnlyMutableListeners.on(window, 'scroll', () => {
-      this.assignToolbarPosition(this.hoveredBlock);
-    }, {
-      passive: true,
-      capture: true,
-    });
   }
 
   /**
