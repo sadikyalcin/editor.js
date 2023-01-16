@@ -107,14 +107,6 @@ export default class Toolbar extends Module<ToolbarNodes> {
   private toolboxInstance: Toolbox;
 
   /**
-   * @private
-   * @type {number}
-   * @memberof Toolbar
-   */
-  private actionsWidth: number;
-  private actionsHeight: number;
-
-  /**
    * @class
    * @param moduleConfiguration - Module Configuration
    * @param moduleConfiguration.config - Editor's config
@@ -126,8 +118,6 @@ export default class Toolbar extends Module<ToolbarNodes> {
       eventsDispatcher,
     });
     this.tooltip = new Tooltip();
-    this.actionsWidth = 58;
-    this.actionsHeight = 26;
   }
 
   /**

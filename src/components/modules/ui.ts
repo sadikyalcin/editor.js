@@ -377,38 +377,38 @@ export default class UI extends Module<UINodes> {
    * Listen redactor mousemove to emit 'block-hovered' event
    */
   private watchBlockHoveredEvents(): void {
-    /**
-     * Used to not emit the same block multiple times to the 'block-hovered' event on every mousemove
-     */
-    let blockHoveredEmitted;
+    // /**
+    //  * Used to not emit the same block multiple times to the 'block-hovered' event on every mousemove
+    //  */
+    // let blockHoveredEmitted;
 
-    this.readOnlyMutableListeners.on(this.nodes.redactor, 'mousemove', _.throttle((event: MouseEvent | TouchEvent) => {
-      const hoveredBlock = (event.target as Element).closest('.ce-block');
+    // this.readOnlyMutableListeners.on(this.nodes.redactor, 'mousemove', _.throttle((event: MouseEvent | TouchEvent) => {
+    //   const hoveredBlock = (event.target as Element).closest('.ce-block');
 
-      /**
-       * Do not trigger 'block-hovered' for cross-block selection
-       */
-      if (this.Editor.BlockSelection.anyBlockSelected) {
-        return;
-      }
+    //   /**
+    //    * Do not trigger 'block-hovered' for cross-block selection
+    //    */
+    //   if (this.Editor.BlockSelection.anyBlockSelected) {
+    //     return;
+    //   }
 
-      if (!hoveredBlock) {
-        return;
-      }
+    //   if (!hoveredBlock) {
+    //     return;
+    //   }
 
-      if (blockHoveredEmitted === hoveredBlock) {
-        return;
-      }
+    //   if (blockHoveredEmitted === hoveredBlock) {
+    //     return;
+    //   }
 
-      blockHoveredEmitted = hoveredBlock;
+    //   blockHoveredEmitted = hoveredBlock;
 
-      this.eventsDispatcher.emit(this.events.blockHovered, {
-        block: this.Editor.BlockManager.getBlockByChildNode(hoveredBlock),
-      });
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    }, 20), {
-      passive: true,
-    });
+    //   this.eventsDispatcher.emit(this.events.blockHovered, {
+    //     block: this.Editor.BlockManager.getBlockByChildNode(hoveredBlock),
+    //   });
+    // // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+    // }, 20), {
+    //   passive: true,
+    // });
   }
 
   /**
@@ -772,25 +772,25 @@ export default class UI extends Module<UINodes> {
       lastBlockBottomCoord < clickedCoord;
 
     if (isClickedBottom) {
-      stopPropagation();
+      // stopPropagation();
 
-      const { BlockManager, Caret, Toolbar } = this.Editor;
+      // const { BlockManager, Caret, Toolbar } = this.Editor;
 
-      /**
-       * Insert a default-block at the bottom if:
-       * - last-block is not a default-block (Text)
-       *   to prevent unnecessary tree-walking on Tools with many nodes (for ex. Table)
-       * - Or, default-block is not empty
-       */
-      if (!BlockManager.lastBlock.tool.isDefault || !BlockManager.lastBlock.isEmpty) {
-        BlockManager.insertAtEnd();
-      }
+      // /**
+      //  * Insert a default-block at the bottom if:
+      //  * - last-block is not a default-block (Text)
+      //  *   to prevent unnecessary tree-walking on Tools with many nodes (for ex. Table)
+      //  * - Or, default-block is not empty
+      //  */
+      // if (!BlockManager.lastBlock.tool.isDefault || !BlockManager.lastBlock.isEmpty) {
+      //   BlockManager.insertAtEnd();
+      // }
 
-      /**
-       * Set the caret and toolbar to empty Block
-       */
-      Caret.setToTheLastBlock();
-      Toolbar.moveAndOpen(BlockManager.lastBlock);
+      // /**
+      //  * Set the caret and toolbar to empty Block
+      //  */
+      // Caret.setToTheLastBlock();
+      // Toolbar.moveAndOpen(BlockManager.lastBlock);
     }
   }
 
