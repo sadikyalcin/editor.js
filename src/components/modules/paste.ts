@@ -181,8 +181,8 @@ export default class Paste extends Module {
     }
 
     const editorJSData = dataTransfer.getData(this.MIME_TYPE);
-    const plainData = dataTransfer.getData('text/plain');
-    let htmlData = dataTransfer.getData('text/html');
+    const plainData = dataTransfer.getData('text/plain').replace(/(\r\n|\n|\r)/gm, '');
+    let htmlData = dataTransfer.getData('text/plain').replace(/(\r\n|\n|\r)/gm, '');
 
     /**
      * If EditorJS json is passed, insert it
@@ -264,7 +264,7 @@ export default class Paste extends Module {
    * Set onPaste callback handler
    */
   private setCallback(): void {
-    // this.listeners.on(this.Editor.UI.nodes.holder, 'paste', this.handlePasteEvent);
+    this.listeners.on(this.Editor.UI.nodes.holder, 'paste', this.handlePasteEvent);
   }
 
   /**
