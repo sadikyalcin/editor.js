@@ -692,7 +692,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
     /**
      * Observe DOM mutations to update Block inputs
      */
-    this.mutationObserver.observe(
+    this.mutationObserver?.observe(
       this.holder.firstElementChild,
       {
         childList: true,
@@ -713,7 +713,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
    * Is fired when Block will be unselected
    */
   public willUnselect(): void {
-    this.mutationObserver.disconnect();
+    this.mutationObserver?.disconnect();
     this.removeInputEvents();
   }
 

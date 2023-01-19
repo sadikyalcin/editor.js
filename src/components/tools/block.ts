@@ -70,6 +70,13 @@ export default class BlockTool extends BaseTool<IBlockTool> {
   }
 
   /**
+   * Returns true if Tool supports isEnabledMutationObserver
+   */
+  public get isEnabledMutationObserver(): boolean {
+    return this.constructable[InternalBlockToolSettings.IsEnabledMutationObserver] !== false;
+  }
+
+  /**
    * Returns Tool toolbox configuration (internal or user-specified).
    *
    * Merges internal and user-defined toolbox configs based on the following rules:

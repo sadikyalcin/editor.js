@@ -17,7 +17,7 @@
 /*!
  * Editor.js
  * 
- * @version 2.26.3-beta-10
+ * @version 2.26.3-beta-11
  * 
  * @licence Apache-2.0
  * @author CodeX <https://codex.so>
