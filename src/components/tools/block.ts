@@ -50,7 +50,7 @@ export default class BlockTool extends BaseTool<IBlockTool> {
       data,
       block,
       readOnly,
-      api: this.api.getMethodsForTool(this),
+      api: this.api,
       config: this.settings,
     }) as IBlockTool;
   }
@@ -143,7 +143,7 @@ export default class BlockTool extends BaseTool<IBlockTool> {
   /**
    * Returns Tool conversion configuration
    */
-  public get conversionConfig(): ConversionConfig {
+  public get conversionConfig(): ConversionConfig | undefined {
     return this.constructable[InternalBlockToolSettings.ConversionConfig];
   }
 
@@ -165,7 +165,7 @@ export default class BlockTool extends BaseTool<IBlockTool> {
    * Returns Tool paste configuration
    */
   public get pasteConfig(): PasteConfig {
-    return this.constructable[InternalBlockToolSettings.PasteConfig] || {};
+    return this.constructable[InternalBlockToolSettings.PasteConfig] ?? {};
   }
 
   /**
