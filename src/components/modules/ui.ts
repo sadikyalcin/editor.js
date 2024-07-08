@@ -418,7 +418,6 @@ export default class UI extends Module<UINodes> {
 
     //   blockHoveredEmitted = hoveredBlock;
 
-<<<<<<< HEAD
     //   this.eventsDispatcher.emit(this.events.blockHovered, {
     //     block: this.Editor.BlockManager.getBlockByChildNode(hoveredBlock),
     //   });
@@ -426,15 +425,6 @@ export default class UI extends Module<UINodes> {
     // }, 20), {
     //   passive: true,
     // });
-=======
-      this.eventsDispatcher.emit(BlockHovered, {
-        block: this.Editor.BlockManager.getBlockByChildNode(hoveredBlock),
-      });
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    }, 20), {
-      passive: true,
-    });
->>>>>>> next
   }
 
   /**

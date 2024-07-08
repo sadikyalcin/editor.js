@@ -564,6 +564,10 @@
   dependencies:
     "@codexteam/icons" "^0.0.5"
 
+"@editorjs/editorjs@https://github.com/sadikyalcin/editor.js#beta":
+  version "2.30.0-rc.14-beta"
+  resolved "https://github.com/sadikyalcin/editor.js#c20a38c880462d985b98b6cd7253b0e058ae7fdc"
+
 "@editorjs/header@^2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@editorjs/header/-/header-2.7.0.tgz#755d104a9210a8e2d9ccf22b175b2a93bdbb2330"
