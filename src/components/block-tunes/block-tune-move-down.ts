@@ -59,6 +59,9 @@ export default class MoveDownTune implements BlockTune {
   public handleClick(): void {
     const currentBlockIndex = this.api.blocks.getCurrentBlockIndex();
     const nextBlock = this.api.blocks.getBlockByIndex(currentBlockIndex + 1);
+    const currentBlock = this.api.blocks.getBlockByIndex(currentBlockIndex);
+
+    console.log('api: ', currentBlock);
 
     // If Block is last do nothing
     if (!nextBlock) {

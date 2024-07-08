@@ -46,6 +46,12 @@
     },
     "moveDown": {
       "Move down": ""
+    },
+    "bringForward": {
+      "Bring forward": ""
+    },
+    "sendBehind": {
+      "Send behind": ""
     }
   }
 }
